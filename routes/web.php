@@ -19,9 +19,13 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/react', function () {
+    return view('react');
 });
+Route::get('/reactsample', function () {
+    return view('reactsample');
+});
+
 
 Auth::routes();
 

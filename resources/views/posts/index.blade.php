@@ -28,6 +28,7 @@
     <tr>
       <th scope="col">Title</th>
       <th scope="col">Body</th>
+      <th scope="col">Date</th>
       <th scope="col"></th>
       
     </tr>
@@ -37,6 +38,7 @@
         
       <td>{{$blog->title}}</td>
       <td>{{$blog->blogpost}}</td>
+      <td>{{$blog->created_at}}</td>
       <td>
         <form action="{{ route('destroy-post', $blog->id) }}" method="POST">
 
@@ -52,7 +54,7 @@
                         @csrf
                         @method('delete')
 
-                        <button type="submit" title="delete" style="border: none; background-color:transparent;">
+                        <button type="submit" title="delete" style="border: none; background-color:transparent;" onclick="return confirm('Are you sure to delete this blog??')">
                             <i class="fas fa-trash fa-lg text-danger"></i>
 
                         </button>
