@@ -78,18 +78,20 @@ Route::post('/posts/store',[BlogController::class, 'store'])->name('store-post')
 //    'middleware' => 'Role:editor',
 //    'uses' => 'RoleController@index',
 // ]);
-Route::get('/rindex', [ReaderContorller::class, 'index'])->name('role-index');
+//Route::get('/rindex', [ReaderContorller::class, 'index'])->name('role-index');
 
 
 
 // AAAAAAAAAAAADDDDDDDDDDDDMMMMMMMMMMMMMMIIIIIIIIIIINNNNNNNNNNNNNN
-Route::get('/posts/dashboard',[AdminController::class, 'index'])->name('index-admin');
+Route::get('/admin/dashboard',[UserController::class, 'index'])->name('index-admin');
 // Route::get('/posts/dashboard',[UserController::class, 'index'])->name('index-post');
 
-
+Route::get('/admin/usercreate',[UserController::class, 'create'])->name('create-user');
+Route::post('/admin/store',[UserController::class, 'store'])->name('store-user');
 Route::get('/admin/show{id}',[UserController::class, 'show'])->name('show-user');
 Route::get('/admin/edit/{id}',[UserController::class, 'edit'])->name('edit-user');
 Route::post('/admin/update/{id}',[UserController::class, 'update'])->name('update-user');
+Route::delete('/admin/destroy/{id}',[UserController::class, 'destroy'])->name('destroy-user');
 
 // Auth::routes();
 // Route::get('/admin', [AdminController::class,'index'])->name('admin-dash')->middleware('admin');

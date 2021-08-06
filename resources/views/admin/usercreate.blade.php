@@ -1,45 +1,28 @@
 @extends('layouts.app')
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
+@section('content')
+<head>
     
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
         <!-- Styles -->
-       <!--  <style>
-            textarea{
-                resize:100px;
-            }
-        </style> -->
-      
+        
+</head>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Register') }}</div>
 
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
-    </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-           
-            <form method="POST" action="{{ route('store-post') }}">
-<div >         
-                      
- 
- @csrf
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
 
                         <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                @error('title')
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -47,13 +30,13 @@
                             </div>
                         </div>
 
-                         <div class="form-group row">
-                            <label for="blogpost" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="blogpost" type="text" class="form-control @error('blogpost') is-invalid @enderror" name="blogpost" value="{{ old('blogpost') }}" required autocomplete="blogpost" autofocus></textarea>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                                @error('blogpost')
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -61,18 +44,45 @@
                             </div>
                         </div>
 
-                            <label  for="title" class="col-md-4"> </label>
-
                         <div class="form-group row">
-                            <div class="col-md-6 ">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        
+
+                     
+
+                        <div class="form-group"> 
+    <label class="radio-inline">
+    <!-- <input type="radio" id="admin" name="roles" value="admin">Admin</label>
+    <label class="radio-inline"> -->
+    <input type="radio" id="author" name="roles" value="author">Author</label>
+    <label class="radio-inline">
+    <input type="radio" id="reader" name="roles" value="reader">Reader</label>
+   
+ </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('ADD BLOG') }}
+                                    {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
-                    
-                     </div>
-                 </form>
+                    </form>
+                </div>
+            </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection

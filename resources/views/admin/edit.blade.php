@@ -7,9 +7,7 @@
             <div class="pull-left">
                 <h2>Edit User</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('index-post') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
-            </div>
+          
         </div>
     </div>
 
@@ -23,6 +21,11 @@
             </ul>
         </div>
     @endif
+    @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{Session::get('success')}}
+    </div>
+@endif
     <form method="POST" action="{{ route('update-user', $user->id) }} ">
         @csrf
        
@@ -34,14 +37,14 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                <input type="text" name="title" value="{{ $user->name }}">
+                <input type="text" name="name" value="{{ $user->name }}">
                 
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Role:</strong>
-              <input type="text" name="blogpost" value=" {{ $user->roles }}">
+              <input type="text" name="roles" value=" {{ $user->roles }}">
             </div>
         </div>
           

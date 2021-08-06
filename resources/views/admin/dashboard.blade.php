@@ -3,8 +3,8 @@
 	 <div class="row justify-content-center">
 
     <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('create-post') }}" title="Create a Blog"> <i class="fas fa-plus-circle"></i>
-                    </a>
+                <!-- <a class="btn btn-success" href="{{ route('create-post') }}" title="Create a User"> <i class="fas fa-plus-circle"></i>
+                    </a> -->
             </div>
 
 	 	<div class="col-md-8">
@@ -27,7 +27,7 @@
       <td>{{$user->name}}</td>
       <td>{{$user->roles}}</td>
       <td>
-        <form action="{{ route('destroy-post', $user->id) }}" method="POST">
+        <form action="{{ route('destroy-user', $user->id) }}" method="POST">
 
                         <a href="{{ route('show-user', $user->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
@@ -41,7 +41,7 @@
                         @csrf
                         @method('delete')
 
-                        <button type="submit" title="delete" style="border: none; background-color:transparent;">
+                        <button type="submit" onclick="return confirm('Are you sure to delete this user??')" title="delete" style="border: none; background-color:transparent;">
                             <i class="fas fa-trash fa-lg text-danger"></i>
 
                         </button>

@@ -39,7 +39,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate the Field
+        $this->validate($request,[
+            'name'=>'required',
+            'email'=>'required',
+            'password'=>'required',
+            'roles'=>'required',
+            
+        ]);
+       // Blog::create($request->all());
+         $user = new User();
         
+        
+        $user->name=$request->name;
+       $user->email=$request->email;
+       $user->password=$request->password;
+       $user->roles=$request->roles;
+        
+        
+        $user->save();
+        return redirect()->route('index-post')->with('message','New Blog Created Successfull !');
+
     }
 
     /**
@@ -86,9 +106,14 @@ class UserController extends Controller
              'name' => $name,
              'roles' => $roles,
          ]);
-         return redirect()->route('index-post')->with('message','Blog Updated');
+       $user= new User;
+        $users = User::get();
+        foreach($users as $user){
+            $user=DB::table('users')->where('id', $id)->first();
+        }
+        return redirect('/admin/dashboard')->withSuccess('User Updated!');
+
     }
-    
 
     /**
      * Remove the specified resource from storage.
@@ -99,6 +124,10 @@ class UserController extends Controller
     public function destroy($id)
     {
     $user=DB::table('users')->where('id', $id)->delete();
-    return redirect()->route('admin.dashboard')->with('message', 'User Deleted Successfully!');
+    echo("sample");
+   // return redirect()->route('index-admin')->with('message', 'User Deleted Successfully!');
+  //  return redirect('admin.dashboard', compact('users'));
+    return redirect('/admin/dashboard')->with('message','User Deleted Succesfully');
+
     }
 }

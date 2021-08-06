@@ -28,7 +28,7 @@ class LoginController extends Controller
 
 
         //     case 'admin':
-        //     $this->redirectTo = '/admin';
+        //     $this->redirectTo = '/admin/dashboard';
         //     return $this->redirectTo;
 
         //     break;
@@ -50,10 +50,13 @@ class LoginController extends Controller
         // }
         if(Auth::user()->roles=='author'){
             return '/posts/index';
-            }else{
-                return 'home';
             }
+            elseif(Auth::user()->roles=='admin'){
+                return'/admin/dashboard';
 
+               
+            }
+ return '/posts/index';
         }
 
 
