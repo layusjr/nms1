@@ -14,8 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->simplePaginate(5);
-        // $users = User::latest()->paginate(3);
+        $users = User::latest()->paginate(3);
         $users = User::get();
       
         

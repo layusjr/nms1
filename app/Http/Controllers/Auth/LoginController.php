@@ -55,13 +55,8 @@ class LoginController extends Controller
                 return'/admin/dashboard';
 
                
-            } elseif(Auth::user()->roles=='reader'){
-                 return '/posts/index';
-
-               
             }
-             return '/login';
-
+ return '/posts/index';
         }
 
 

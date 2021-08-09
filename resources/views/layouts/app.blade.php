@@ -64,10 +64,14 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+<<<<<<< HEAD
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="/logout" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}, {{ Auth::user()->roles }}
+=======
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+>>>>>>> parent of 0f83458 (update)
                                 </a>
-
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class = "dropdown-item" href="{{'editprofile' }}">Edit Profile</a>

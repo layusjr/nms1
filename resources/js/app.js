@@ -14,5 +14,3 @@ require('./bootstrap');
 
 require('./components/Example');
 require('./components/Example55');
-require('./components/pages/MyFirstReactPage');
-require('./components/pages/ReactPage');
