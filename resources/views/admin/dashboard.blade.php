@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
+
+
+
 	 <div class="row justify-content-center">
+     
 
     <div class="pull-right">
                 <!-- <a class="btn btn-success" href="{{ route('create-post') }}" title="Create a User"> <i class="fas fa-plus-circle"></i>
@@ -9,8 +13,9 @@
 
 	 	<div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Users') }}</div>
-         
+                <a class="card-header">{{ __('Users') }}</a>
+               
+  
 
                 <table class="table table-hover">
   <thead>

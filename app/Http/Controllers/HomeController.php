@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use DB;
+use Auth;
 class HomeController extends Controller
 {
     /**
