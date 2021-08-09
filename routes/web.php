@@ -19,14 +19,11 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/react', function () {
+    return view('react');
 });
 Route::get('/reactsample', function () {
     return view('reactsample');
-});
-Route::get('/reactpages/login', function () {
-    return view('login');
 });
 
 
@@ -50,7 +47,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Route::get('/posts', [App\Http\Controllers\loginController::class, 'index']);
 
-Route::get('/login', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
+// Route::get('/login', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
 
 //  Route::get("posts",[BlogController::class,"index"]);
 // // Route::get("posts",[BlogController::class,"create"]);
@@ -122,12 +119,3 @@ Route::get('/index-post', [App\Http\Controllers\HomeController::class, 'restrict
 // Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'restricted1'])->middleware(['admin']);
 
 Route::get('/admin/dashboard',[App\Http\Controllers\UserController::class, 'index']);
-
-
-
-// Route::middleware([Admin::class])-gorup()function(){
-//     Route::get('index', [AdminController::class,'index']);
-//     Route::get('store', [AdminController::class,'strore']);
-//     Route::get('destroy', [AdminController::class,'index']);
-//     Route::get('index', [AdminController::class,'index']);
-// }

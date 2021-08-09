@@ -1,6 +1,5 @@
-import {CForm,CFormControl, CFormLabel, CircularProgress, AppBar, Paper, Button, Container, Grid, Toolbar, Typography, Box, Avatar } from '@material-ui/core';
+import { CircularProgress, AppBar, Paper, Button, Container, Grid, Toolbar, Typography, Box, Avatar } from '@material-ui/core';
 import { Add as AddIcon } from '@material-ui/icons';
-import { Login as LoginIcon } from '@material-ui/icons';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -25,6 +24,8 @@ const MyFirstReactPage = ()=>{
         setCounter(ctr + 1);
     }
 
+    
+
     return(
         <Container>
             <AppBar>
@@ -46,10 +47,6 @@ const MyFirstReactPage = ()=>{
 
                 </Grid>
                 <Grid item xs={6}>
-                <Button startIcon={<LoginIcon/>}>
-    Login
-
-</Button>
                     <Paper variant='outlined'>
                         <Typography variant='h6'>
                             {`Counter count : ${ctr}`}
@@ -71,16 +68,26 @@ const MyFirstReactPage = ()=>{
                                 <Typography>No User</Typography>
                             )
                         }
-                        
                     </Paper>
                 </Grid>
+                
             </Grid>
-
-
-
-            <Grid>
-
-            </Grid>
+<Grid>
+<Button color="primary" >
+  Primary
+</Button>
+</Grid>
+<Grid>
+<div className="mb-3">
+    <CFormLabel htmlFor="exampleFormControlInput1">Email address</CFormLabel>
+    <CFormControl
+      type="email"
+      id="exampleFormControlInput1"
+      placeholder="name@example.com"
+    />
+  </div>
+</Grid>
+    
         </Container>
     )
 }
