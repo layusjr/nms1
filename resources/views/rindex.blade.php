@@ -1,65 +1,19 @@
-@extends('layouts.app')
 
-@section('content')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Laravel</title>
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-<div  class="container">
-   <div class="row justify-content-center">
-  
-
-    <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Blogs') }}</div>
-         
-
-                <table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Author</th>
-      <th scope="col"></th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    @foreach($blogs as $blog)
-        
-      <td>{{$blog->title}}</td>
-      <td>{{$blog->blogpost}}</td>
-      <td>
-        <form action="{{ route('destroy-post', $blog->id) }}" method="POST">
-
-                        <a href="{{ route('show-post', $blog->id) }}" title="show">
-                            <i class="fas fa-eye text-success  fa-lg"></i>
-                        </a>
-
-                        <a href="{{ route('edit-post', $blog->id) }}">
-                            <i class="fas fa-edit  fa-lg"></i>
-
-                        </a>
-
-                        @csrf
-                        @method('delete')
-
-                        <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                            <i class="fas fa-trash fa-lg text-danger"></i>
-
-                        </button>
-                    </form>
-       </td>
-    </tr>
-    @endforeach
-    
-  </tbody>
-</table>
+    </head>
+    <body class="antialiased">
+        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8" id="example">
+     
             </div>
         </div>
-    </div>
-</div>
-
-  
-
- 
-
-
-
-@endsection
+        <script src="{{ mix('js/app.js') }}"></script>
+    </body>
+</html> 

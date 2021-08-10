@@ -15,7 +15,7 @@ class BlogController extends Controller
       $blogs = Blog::get();
       
         
-        return view('posts.index', compact('blogs'))->with('i',(request()->input('page',1)-1)*5)->withSuccess('Success message');
+        return view('/posts/index', compact('blogs'))->with('i',(request()->input('page',1)-1)*5)->withSuccess('Success message');
     }
 
      public function create()
@@ -48,11 +48,7 @@ class BlogController extends Controller
         return redirect()->route('index-post')->with('message','New Blog Created Successfull !');
 
     }
-   
-
-   
-
-     
+      
     public function show($id)
 
 {

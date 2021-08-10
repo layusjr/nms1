@@ -1,8 +1,9 @@
 
 @extends('layouts.app')
-@extends('layouts.main')
+
 @section('content')
-    <div class="row">
+<div  class="container">
+	 <div class="row justify-content-center">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 <h2>Edit Blog</h2>

@@ -13,14 +13,16 @@
 	 <div class="row justify-content-center">
     @if(Auth::user()->roles != 'reader')
     <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('create-post') }}" title="Create a Blog"> <i class="fas fa-plus-circle" value="Create"></i>
-                    </a>
-            </div>
+                
+            </div> 
     @endif
 
 	 	<div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Blogs') }}</div>
+                <div class="card-header">{{ __('Blogs') }}
+                <a class="btn btn-success pull-right" href="{{ route('create-post') }}" title="Create a Blog"> <i class="fas fa-plus-circle" value="Create"></i>
+                    </a>
+                </div>
          
 
                 <table class="table table-hover">
@@ -36,7 +38,7 @@
     @foreach($blogs as $blog)
         
       <td>{{$blog->title}}</td>
-      <td>{{$blog->blogpost}}</td>
+      <!-- <td>{{$blog->blogpost}}</td> -->
       <td>
         <form action="{{ route('destroy-post', $blog->id) }}" method="POST">
 
@@ -64,10 +66,12 @@
     
   </tbody>
 </table>
-            </div>
-        </div>
-    </div>
 </div>
+</div>
+</div>
+     
+   
+
 
 	
 

@@ -16,20 +16,17 @@ class Reader
      */
     public function handle(Request $request, Closure $next)
     {
-       if (! Auth::check()) {
-        return redirect()->route('login');
+        if (! Auth::check()) {
+            return redirect()->route('login');
+        }
+    
+            if($request->user() && $request->user()->roles == 'author'){
+                return $next($request);
+            }
+            Auth::logout();
+            return redirect()->route('index-post');
+    
+            
+    
     }
-
-    if (Auth::user()->role == admin) {
-        return redirect()->route('admin-dash');
-        
     }
-
-    if (Auth::user()->role == author) {
-        return redirect()->route('post/index');
-    }
-
-    if (Auth::user()->role == reader) {
-        return $next($request);
-    }
-}

@@ -68,12 +68,12 @@
 
                      
 
-                        <div class="form-group"> 
-    <label class="radio-inline">
+                        <div class="form-group row"> 
+    <label class="radio-inline"hidden>
     <input type="radio" id="admin" name="roles" value="admin">Admin</label>
     <label class="radio-inline">
     <input type="radio" id="author" name="roles" value="author">Author</label>
-    <label class="radio-inline">
+    <label class="radio-inline" >
     <input type="radio" id="reader" name="roles" value="reader">Reader</label>
    
  </div>

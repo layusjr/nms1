@@ -66,7 +66,7 @@ class Kernel extends HttpKernel
 
 
 
-       'admin'=>\App\Http\Middleware\Admin::class,
+       'admin'=>\App\Http\Middleware\AdminMiddleware::class,
        'blog'=>\App\Http\Middleware\BlogMiddleware::class,
        'reader'=>\App\Http\Middleware\Reader::class,
     
@@ -76,19 +76,6 @@ class Kernel extends HttpKernel
 
 
 
-    // users
-    protected $middlewareGroups1 = [
-    'approver+' => [
-        \App\Http\Middleware\Approver::class,
-        \App\Http\Middleware\Editor::class,
-        \App\Http\Middleware\Admin::class,
-    ],
-];
+  
 
-protected $routeMiddleware2 = [
-    'student' => \App\Http\Middleware\Student::class,
-    'approver' => \App\Http\Middleware\Approver::class,
-    'editor' => \App\Http\Middleware\Editor::class,
-    'admin' => \App\Http\Middleware\Admin::class,
-];
 }

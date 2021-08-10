@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controller\BlogController;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -24,42 +25,42 @@ class LoginController extends Controller
 
     protected $redirectTo;
     public function redirectTo(){
-        // switch(Auth::user()->roles){
+        switch(Auth::user()->roles){
 
 
-        //     case 'admin':
-        //     $this->redirectTo = '/admin/dashboard';
-        //     return $this->redirectTo;
+            case 'admin':
+            $this->redirectTo = 'admin/dashboard';
+            return $this->redirectTo;
+                    
+            break;
 
-        //     break;
+            case 'author':
+            $this->redirectTo = '/posts/index';
+            return $this->redirectTo;
+            break;
 
-        //     case 'author':
-        //     $this->redirectTo = '/post/index';
-        //     return $redirectTo;
-        //     break;
+             case 'reader':
+            $this->redirectTo = '/posts/index';
+            return $this->redirectTo;
 
-        //      case 'reader':
-        //     $this->redirectTo = '/reader';
-        //     return $this->redirectTo;
+            break;
 
-        //     break;
-
-        //     default:
-        //     $this->redirectTo = '/login';
-        //     return $this->redirectTo;
-        // }
-        if(Auth::user()->roles=='author'){
-            return '/posts/index';
-            }
-            elseif(Auth::user()->roles=='admin'){
-                return'/admin/dashboard';
+            default:
+            $this->redirectTo = '/login';
+            return $this->redirectTo;
+        }
+//         if(Auth::user()->roles!='admin'){
+//             return '/posts/index';
+//             }
+//             elseif(Auth::user()->roles=='admin'){
+//                 return'/admin/dashboard';
 
                
-            }
- return '/posts/index';
-        }
+//             }
+//  return '/posts/index';
+//         }
 
-
+}
     /**
      * Where to redirect users after login.
      *
