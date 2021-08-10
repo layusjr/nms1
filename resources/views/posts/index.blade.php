@@ -20,8 +20,10 @@
 	 	<div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Blogs') }}
+                  @if(Auth::user()->roles != 'reader')
                 <a class="btn btn-success pull-right" href="{{ route('create-post') }}" title="Create a Blog"> <i class="fas fa-plus-circle" value="Create"></i>
                     </a>
+                    @endif
                 </div>
          
 

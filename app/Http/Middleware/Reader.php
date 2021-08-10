@@ -20,7 +20,7 @@ class Reader
             return redirect()->route('login');
         }
     
-            if($request->user() && $request->user()->roles == 'author'){
+            if($request->user() && $request->user()->roles == 'reader'){
                 return $next($request);
             }
             Auth::logout();

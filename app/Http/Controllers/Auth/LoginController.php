@@ -35,7 +35,7 @@ class LoginController extends Controller
             break;
 
             case 'author':
-            $this->redirectTo = '/posts/index';
+            $this->redirectTo = '/author/posts/index';
             return $this->redirectTo;
             break;
 

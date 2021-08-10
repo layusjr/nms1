@@ -21,6 +21,10 @@ use App\Models\User;
 |
 */
 
+
+Route::get('/loginpage', function () {
+    return view('loginpage');
+}); 
 Route::get('/', function () {
     return view('welcome');
 });
@@ -137,14 +141,14 @@ Route::get('/reader', 'ReaderController@index')->name('reader')->middleware('rea
 // Route::post('/admin/update/{id}',[UserController::class, 'update'])->name('update-user');
 // Route::delete('/admin/destroy/{id}',[UserController::class, 'destroy'])->name('destroy-user');
 
-Route::middleware('admin')->group(function (){
+Route::middleware('admin')->prefix('admin')->group(function (){
     // Route::get('admin/dashboard', 'UserController@index')->name('admin-dashboard');
      Route::get('admin/dashboard',[App\Http\Controllers\UserController::class, 'index'])->name('admin-dashboard');
      Route::get('admin/usercreate',[App\Http\Controllers\UserController::class, 'create'])->name('create-user');
      Route::get('admin/store',[App\Http\Controllers\UserController::class, 'store'])->name('store-user');
      Route::get('admin/show{id}',[App\Http\Controllers\UserController::class, 'show'])->name('show-user');
-     Route::get('/admin/edit/{id}',[App\Http\ControllersUserController::class, 'edit'])->name('edit-user');
-     Route::post('/admin/update/{id}',[App\Http\ControllersUserController::class, 'update'])->name('update-user');
+     Route::get('/admin/edit/{id}',[App\Http\Controllers\UserController::class, 'edit'])->name('edit-user');
+     Route::post('/admin/update/{id}',[App\Http\Controllers\UserController::class, 'update'])->name('update-user');
      Route::get('admin/destroy/{id}',[App\Http\Controllers\UserController::class, 'destroy'])->name('destroy-user');
 
      Route::get('/posts/edit/{id}',[App\Http\Controllers\BlogController::class, 'edit'])->name('edit-post');
@@ -157,7 +161,7 @@ Route::middleware('admin')->group(function (){
 });
 
 
-Route::middleware('blog')->group(function (){
+Route::middleware('blog')->prefix('author')->group(function (){
     //Route::get('posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
     Route::get('/posts/edit/{id}',[App\Http\Controllers\BlogController::class, 'edit'])->name('edit-post');
     Route::post('/posts/update/{id}',[App\Http\Controllers\BlogController::class, 'update'])->name('update-post');
@@ -169,7 +173,7 @@ Route::middleware('blog')->group(function (){
 });
 
 
-Route::middleware('reader')->prefix('posts')->group(function (){
-    Route::get('posts/', 'BlogController@index')->name('post-index');
-    // Route::get('/dashboard',[App\Http\Controllers\UserController::class, 'index']);
+Route::middleware('reader')->group(function (){
+    Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
+    Route::get('/posts/show{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
 });

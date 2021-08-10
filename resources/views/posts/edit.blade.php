@@ -41,7 +41,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-              <input type="text" name="blogpost" value=" {{ $blog->blogpost }}">
+              <textarea type="text" name="blogpost" >{{ $blog->blogpost }}</textarea>
             </div>
         </div>
           

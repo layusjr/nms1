@@ -18,7 +18,11 @@
             <div class="card">
               <nav>
 
-                <div class="card-header">{{ __('Users') }}</div>
+                <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Users')">Users List</button>
+  <button class="tablinks" onclick="openCity(event, 'Blog')">Blog List</button>
+  <!-- <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button> -->
+</div>
               </nav>
 
                 <table class="table table-hover">
