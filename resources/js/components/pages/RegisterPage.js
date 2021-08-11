@@ -87,8 +87,7 @@ export default function RegisterPage() {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
-          />
+                      />
           <TextField
             variant="outlined"
             margin="normal"

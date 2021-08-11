@@ -46,6 +46,9 @@
                     <ul class="navbar-nav mr-auto">
                         BLOG CON
                     </ul>
+                  
+                 
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -63,6 +66,11 @@
                                 </li>
                             @endif
                         @else
+                               <!-- <a class="navbar-nav mr-auto"  href="#">
+                        Blog List
+                    </a>  <a href="#">
+                        User List
+                        </a > -->
                         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

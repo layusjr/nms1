@@ -72,7 +72,8 @@ const MyFirstReactPage = () => {
             </Grid>
             <table name="users" id="users">
                 <TableHead>This is Users table</TableHead>
-                <TableBody><TableRow>
+                <TableBody>
+                    <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell></TableCell>
                 <TableCell>Column3</TableCell>

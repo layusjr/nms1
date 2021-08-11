@@ -31,7 +31,9 @@ Route::get('react/registerpage', function () {
 Route::get('react/indexblog', function () {
     return view('react/indexblog');
 }); 
-
+Route::get('react/userpage', function () {
+    return view('react/userpage');
+}); 
 
 
 

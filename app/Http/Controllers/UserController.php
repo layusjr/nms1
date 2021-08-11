@@ -130,4 +130,13 @@ class UserController extends Controller
     return redirect('/admin/dashboard')->with('message','User Deleted Succesfully');
 
     }
+
+    public function view()
+    {
+        $users = User::latest()->paginate(3);
+        $users = User::get();
+      
+        
+        return view('layouts.app', compact('users'))->with('i',(request()->input('page',1)-1)*5)->withSuccess('Success message');
+    }
 }

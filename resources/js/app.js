@@ -19,3 +19,4 @@ require('./components/pages/AdminDashboard');
 require('./components/pages/LoginPage');
 require('./components/pages/RegisterPage');
 require('./components/pages/BlogPage');
+require('./components/pages/UserPage');
