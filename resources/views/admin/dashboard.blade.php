@@ -20,7 +20,7 @@
 
                 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Users')">Users List</button>
-  <button class="tablinks" onclick="openCity(event, 'Blog')">Blog List</button>
+  <button  action="{{route('index-post')}}">Blog List</button>
   <!-- <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button> -->
 </div>
               </nav>

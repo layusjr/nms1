@@ -22,9 +22,20 @@ use App\Models\User;
 */
 
 
-Route::get('/loginpage', function () {
-    return view('loginpage');
+Route::get('react/loginpage', function () {
+    return view('react/loginpage');
 }); 
+Route::get('react/registerpage', function () {
+    return view('react/registerpage');
+}); 
+Route::get('react/indexblog', function () {
+    return view('react/indexblog');
+}); 
+
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -106,13 +117,13 @@ Route::get('/rindex', function (Request $request){
 // 	});
 
 // });
-Route::get('/index-post', [App\Http\Controllers\HomeController::class, 'restricted'])->middleware(['blog']);
+// Route::get('/index-post', [App\Http\Controllers\HomeController::class, 'restricted'])->middleware(['blog']);
 
 // Route::get('/admin', [App\Http\Controllers\HomeController::class, 'restricted1'])->middleware(['admin']);
 
 // Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'restricted1'])->middleware(['admin']);
 
-Route::get('/admin/dashboard',[App\Http\Controllers\UserController::class, 'index']);
+// Route::get('/admin/dashboard',[App\Http\Controllers\UserController::class, 'index']);
 
 
 
@@ -141,31 +152,19 @@ Route::get('/reader', 'ReaderController@index')->name('reader')->middleware('rea
 // Route::post('/admin/update/{id}',[UserController::class, 'update'])->name('update-user');
 // Route::delete('/admin/destroy/{id}',[UserController::class, 'destroy'])->name('destroy-user');
 
-Route::middleware('admin')->prefix('admin')->group(function (){
+Route::middleware(['admin'])->group(function (){
     // Route::get('admin/dashboard', 'UserController@index')->name('admin-dashboard');
-     Route::get('admin/dashboard',[App\Http\Controllers\UserController::class, 'index'])->name('admin-dashboard');
-     Route::get('admin/usercreate',[App\Http\Controllers\UserController::class, 'create'])->name('create-user');
-     Route::get('admin/store',[App\Http\Controllers\UserController::class, 'store'])->name('store-user');
-     Route::get('admin/show{id}',[App\Http\Controllers\UserController::class, 'show'])->name('show-user');
-     Route::get('/admin/edit/{id}',[App\Http\Controllers\UserController::class, 'edit'])->name('edit-user');
-     Route::post('/admin/update/{id}',[App\Http\Controllers\UserController::class, 'update'])->name('update-user');
-     Route::get('admin/destroy/{id}',[App\Http\Controllers\UserController::class, 'destroy'])->name('destroy-user');
-
-     Route::get('/posts/edit/{id}',[App\Http\Controllers\BlogController::class, 'edit'])->name('edit-post');
-     Route::post('/posts/update/{id}',[App\Http\Controllers\BlogController::class, 'update'])->name('update-post');
-     Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
-     Route::delete('/posts/destroy/{id}',[App\Http\Controllers\BlogController::class, 'destroy'])->name('destroy-post');
-     Route::get('/posts/show{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
-     Route::get('/posts/create',[App\Http\Controllers\BlogController::class, 'create'])->name('create-post');
-     Route::post('/posts/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');
-});
-
-
-Route::middleware('blog')->prefix('author')->group(function (){
-    //Route::get('posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
+    Route::get('/admin/dashboard',[App\Http\Controllers\UserController::class, 'index'])->name('admin-dashboard');
+    Route::get('/admin/usercreate',[App\Http\Controllers\UserController::class, 'create'])->name('create-user');
+    Route::post('admin/store',[App\Http\Controllers\UserController::class, 'store'])->name('store-user');
+    Route::get('/admin/show{id}',[App\Http\Controllers\UserController::class, 'show'])->name('show-user');
+    Route::get('/admin/edit/{id}',[App\Http\Controllers\UserController::class, 'edit'])->name('edit-user');
+    Route::post('/admin/update/{id}',[App\Http\Controllers\UserController::class, 'update'])->name('update-user');
+    Route::delete('/admin/destroy/{id}',[App\Http\Controllers\UserController::class, 'destroy'])->name('destroy-user');
+    
+    Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
     Route::get('/posts/edit/{id}',[App\Http\Controllers\BlogController::class, 'edit'])->name('edit-post');
     Route::post('/posts/update/{id}',[App\Http\Controllers\BlogController::class, 'update'])->name('update-post');
-    Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
     Route::delete('/posts/destroy/{id}',[App\Http\Controllers\BlogController::class, 'destroy'])->name('destroy-post');
     Route::get('/posts/show{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
     Route::get('/posts/create',[App\Http\Controllers\BlogController::class, 'create'])->name('create-post');
@@ -173,7 +172,23 @@ Route::middleware('blog')->prefix('author')->group(function (){
 });
 
 
-Route::middleware('reader')->group(function (){
-    Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
-    Route::get('/posts/show{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
+Route::prefix('author')->group(function (){
+    //Route::get('posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
+    Route::get('/posts/edit/{id}',[App\Http\Controllers\BlogController::class, 'edit'])->name('edit-post');
+     Route::post('/posts/update/{id}',[App\Http\Controllers\BlogController::class, 'update'])->name('update-post');
+     Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
+     Route::delete('/posts/destroy/{id}',[App\Http\Controllers\BlogController::class, 'destroy'])->name('destroy-post');
+     Route::get('/posts/show{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
+     Route::get('/posts/create',[App\Http\Controllers\BlogController::class, 'create'])->name('create-post');
+     Route::post('/posts/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');Route::post('/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');
 });
+
+
+// Route::middleware([ 'reader'])->group(function (){
+//     Route::get('/posts/show{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
+//     Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
+// });
+ Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post')->middleware('web');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

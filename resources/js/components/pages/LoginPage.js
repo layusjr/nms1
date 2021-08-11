@@ -218,7 +218,7 @@ export default function LoginPage() {
                 Forgot password?
               </Link> */}
             
-              <Link href="#" variant="body2">
+              <Link href="http://127.0.0.1:8000/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
@@ -232,6 +232,6 @@ export default function LoginPage() {
   );
 }
 
-if (document.getElementById('app1')) {
-  ReactDOM.render(<LoginPage />, document.getElementById('app1'));
+if (document.getElementById('login')) {
+  ReactDOM.render(<LoginPage />, document.getElementById('login'));
 }

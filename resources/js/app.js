@@ -17,3 +17,5 @@ require('./components/Example55');
 require('./components/pages/MyFirstReactPage');
 require('./components/pages/AdminDashboard');
 require('./components/pages/LoginPage');
+require('./components/pages/RegisterPage');
+require('./components/pages/BlogPage');
