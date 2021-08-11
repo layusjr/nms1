@@ -31,7 +31,7 @@
   <thead>
     <tr>
       <th scope="col">Title</th>
-      <th scope="col">Body</th>
+      <th scope="col">Action</th>
       <th scope="col"></th>
       
     </tr>
