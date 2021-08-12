@@ -34,8 +34,21 @@ Route::get('react/indexblog', function () {
 Route::get('react/userpage', function () {
     return view('react/userpage');
 }); 
+Route::get('/rindex', function () {
+    return view('/rindex');
+});
+ Route::get('/sample', function () {
+    return view('sample');
+}); 
+Route::get('react/createpost', function () {
+    return view('/react/createpost');
+}); 
 
 
+
+Route::get('/posts/indexs', function () {
+    return view('react/indexblog');
+}); 
 
 
 Route::get('/', function () {
@@ -163,8 +176,8 @@ Route::middleware(['admin'])->group(function (){
     Route::get('/admin/edit/{id}',[App\Http\Controllers\UserController::class, 'edit'])->name('edit-user');
     Route::post('/admin/update/{id}',[App\Http\Controllers\UserController::class, 'update'])->name('update-user');
     Route::delete('/admin/destroy/{id}',[App\Http\Controllers\UserController::class, 'destroy'])->name('destroy-user');
-    
-    Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
+
+    // Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
     Route::get('/posts/edit/{id}',[App\Http\Controllers\BlogController::class, 'edit'])->name('edit-post');
     Route::post('/posts/update/{id}',[App\Http\Controllers\BlogController::class, 'update'])->name('update-post');
     Route::delete('/posts/destroy/{id}',[App\Http\Controllers\BlogController::class, 'destroy'])->name('destroy-post');
@@ -178,12 +191,15 @@ Route::prefix('author')->group(function (){
     //Route::get('posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
     Route::get('/posts/edit/{id}',[App\Http\Controllers\BlogController::class, 'edit'])->name('edit-post');
      Route::post('/posts/update/{id}',[App\Http\Controllers\BlogController::class, 'update'])->name('update-post');
-     Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
+    //  Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-post');
      Route::delete('/posts/destroy/{id}',[App\Http\Controllers\BlogController::class, 'destroy'])->name('destroy-post');
      Route::get('/posts/show{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
      Route::get('/posts/create',[App\Http\Controllers\BlogController::class, 'create'])->name('create-post');
-     Route::post('/posts/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');Route::post('/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');
+    //  Route::post('/posts/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');
+     Route::post('/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');
 });
+
+
 
 
 // Route::middleware([ 'reader'])->group(function (){

@@ -8,25 +8,28 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Container from '@material-ui/core/Container';
+import {Container,Button} from '@material-ui/core';
 import { SettingsBackupRestoreSharp } from '@material-ui/icons';
 import { stringify } from 'postcss';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const BlogPage = () =>{
     const [blogs, setBLogs] = useState([]);
 
 
- const fetchBlog = () => fetch('http://127.0.0.1:8000/posts/index').then((data) => data.json());
-    
-const getBlogs = async () =>{
-    const users = await fetchBlog();
-    console.log(JSON,stringify(blogs.data, null,2));
-    setBLogs(users.data)
-}
+    const fetchData = async () => {
+      fetch('/posts/index')
+      .then(response => response.json())
+      .then(data => {
+        setBLogs(data.blogs_data)
+      });
+  };
 
-useEffect(() =>{
-    getBlogs();
-}, [])
+  useEffect(() => {
+      fetchData();
+  }, [])
 
 const useStyles = makeStyles({
   table: {
@@ -44,24 +47,34 @@ const useStyles = makeStyles({
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell>Blog Title</TableCell>
-            <TableCell align="right">Author</TableCell>
-            <TableCell align="right">Date Posted</TableCell>
-            <TableCell align="right">Action</TableCell>
-          </TableRow>
         </TableHead>
-        <TableBody>
+        <TableRow>
+        <TableCell>Name</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Date Created</TableCell>
+            <TableCell>Action</TableCell>
+          </TableRow>
+        
+        <TableBody>{ 
+        
+             blogs.map((blog) => (
+             <TableRow component="th" key ={blog.id}>
+                 
+                <TableCell>{blog.title}</TableCell>
+                <TableCell>{blog.blogpost}</TableCell>
+                <TableCell>{blog.created_at}</TableCell>
+                <TableCell className="classes.buttonAction">
+                <Button variant="contained" color="green" href="#" startIcon={<VisibilityIcon/>}>Show</Button>
+                <Button variant="contained" color="primary" href="#" startIcon={<EditIcon/>}>EDit</Button>
+                <Button variant="contained" color="secondary" href="#" startIcon={<DeleteIcon/>} >Delete</Button>
+                </TableCell>
+             </TableRow>
+            
+        ) )
+            }
          
-            <TableRow >
-              <TableCell component="th" scope="row">
-                
-              </TableCell>
-              <TableCell align="right"></TableCell>
-              <TableCell align="right"></TableCell>
-              <TableCell align="right"></TableCell>
-              <TableCell align="right"></TableCell>
-            </TableRow>
+           
+            
           
         </TableBody>
       </Table>

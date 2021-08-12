@@ -1,43 +1,19 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-const Tab = styled.button`
-  font-size: 20px;
-  padding: 10px 60px;
-  cursor: pointer;
-  opacity: 0.6;
-  background: white;
-  border: 0;
-  outline: 0;
-  ${({ active }) =>
-    active &&
-    `
-    border-bottom: 2px solid black;
-    opacity: 1;
-  `}
-`;
-const ButtonGroup = styled.div`
-  display: flex;
-`;
-const types = ['Cash', 'Credit Card', 'Bitcoin'];
-function TabGroup() {
-  const [active, setActive] = useState(types[0]);
-  return (
-    <>
-      <ButtonGroup>
-        {types.map(type => (
-          <Tab
-            key={type}
-            active={active === type}
-            onClick={() => setActive(type)}
-          >
-            {type}
-          </Tab>
-        ))}
-      </ButtonGroup>
-      <p />
-      <p> Your payment selection: {active} </p>
-    </>
-  );
-}
-// Usage
-<TabGroup/>
+
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Laravel</title>
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    </head>
+    <body class="antialiased">
+      <div id="example55">
+      
+      </div>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/manifest.js') }}"></script>
+    <script src="{{ mix('js/vendor.js') }}"></script>
+    </body>
+</html> 

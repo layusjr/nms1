@@ -12,11 +12,13 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
-require('./components/Example55');
+require('./components/pages/Example');
+require('./components/pages/Example55');
 require('./components/pages/MyFirstReactPage');
 require('./components/pages/AdminDashboard');
 require('./components/pages/LoginPage');
 require('./components/pages/RegisterPage');
 require('./components/pages/BlogPage');
 require('./components/pages/UserPage');
+require('./components/HeaderNavBar');
+require('./components/pages/CreatePost');

@@ -140,3 +140,5 @@ class UserController extends Controller
         return view('layouts.app', compact('users'))->with('i',(request()->input('page',1)-1)*5)->withSuccess('Success message');
     }
 }
+
+

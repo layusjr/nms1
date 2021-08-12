@@ -40,6 +40,8 @@
     @foreach($blogs as $blog)
         
       <td>{{$blog->title}}</td>
+      <td>{{$blog->user_name}}</td>
+      <!-- <td>{{$blog->user_name}}</td> -->
       <!-- <td>{{$blog->blogpost}}</td> -->
       <td>
         <form action="{{ route('destroy-post', $blog->id) }}" method="POST">
