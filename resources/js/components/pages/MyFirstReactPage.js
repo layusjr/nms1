@@ -23,7 +23,7 @@ const MyFirstReactPage = () => {
  
     const getUsers = async () =>{
         const users = await fetchUser();
-        console.log(JSON.stringify(users.data, null, 2));
+        console.log(JSON.stringify(users.data, null, 5));
         console.log(users.links)
         // users.data
         setUsers(users.data)

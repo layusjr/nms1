@@ -58,7 +58,7 @@ class UserController extends Controller
         
         
         $user->save();
-        return redirect()->route('index-post')->with('message','New Blog Created Successfull !');
+        return redirect()->route('index-posts')->with('message','New Blog Created Successfull !');
 
     }
 

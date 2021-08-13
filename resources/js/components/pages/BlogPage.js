@@ -20,7 +20,7 @@ const BlogPage = () =>{
 
 
     const fetchData = async () => {
-      fetch('/posts/index')
+      fetch('/posts/indexs')
       .then(response => response.json())
       .then(data => {
         setBLogs(data.blogs_data)
@@ -50,7 +50,7 @@ const useStyles = makeStyles({
         </TableHead>
         <TableRow>
         <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
+            <TableCell>Author</TableCell>
             <TableCell>Date Created</TableCell>
             <TableCell>Action</TableCell>
           </TableRow>
@@ -61,7 +61,7 @@ const useStyles = makeStyles({
              <TableRow component="th" key ={blog.id}>
                  
                 <TableCell>{blog.title}</TableCell>
-                <TableCell>{blog.blogpost}</TableCell>
+                <TableCell>{blog.user_name}</TableCell>
                 <TableCell>{blog.created_at}</TableCell>
                 <TableCell className="classes.buttonAction">
                 <Button variant="contained" color="green" href="#" startIcon={<VisibilityIcon/>}>Show</Button>

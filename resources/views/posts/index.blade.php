@@ -31,6 +31,7 @@
   <thead>
     <tr>
       <th scope="col">Title</th>
+      <th scope="col">Author</th>
       <th scope="col">Action</th>
       <th scope="col"></th>
       
@@ -49,7 +50,7 @@
                         <a href="{{ route('show-post', $blog->id) }}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a>
-@if(Auth::user()->roles != 'reader')
+                        @if(Auth::user()->roles != 'reader')
                         <a href="{{ route('edit-post', $blog->id) }}">
                             <i class="fas fa-edit  fa-lg"></i>
 

@@ -10,18 +10,31 @@ use DB;
 
 class BlogController extends Controller
 {
-     public function index()
+    //fetch json file/data
+    //  public function index(){
+    //      $id = auth()->id();
+    //      $name = auth()->user()->name;
+    //      dd($name);
+    //      $blogs = Blog::latest()->paginate(3);
+    //      $blogs = Blog::get();
+    //      return response()->json([
+    //       'blogs_data' => $blogs, 
+    //     ]);  
+    // }
+
+    //View Blog Index
+    public function index()
     {
          $id = auth()->id();
          $name = auth()->user()->name;
         //  dd($name);
          $blogs = Blog::latest()->paginate(3);
          $blogs = Blog::get();
-         return response()->json([
-          'blogs_data' => $blogs, 
-        ]);
+        //  return response()->json([
+        //   'blogs_data' => $blogs, 
+        // ]);
         
-        //  return view('/posts/index', compact('blogs'))->with('i',(request()->input('page',1)-1)*5)->withSuccess('Success message');
+         return view('/posts/index', compact('blogs'))->with('i',(request()->input('page',1)-1)*5)->withSuccess('Success message');
     }
 
      public function create()
@@ -55,39 +68,45 @@ class BlogController extends Controller
           $blog->blogpost=$request->blogpost;
           $blog->user_name=$name;
           $blog->save();
-          return redirect()->route('index-post')->with('message','New Blog Created Successfull !');
+          return redirect()->route('index-posts')->with('message','New Blog Created Successfull !');
 
         }
       
-      public function show($id){
-
-
-      $blogs= new Blog;
-      foreach ($blogs as $blog)  {
-      $blog=DB::table('blogs')->where('id', $id)->first();
-      }
-      return view('posts.show', compact('blog'));
+        //View one Blog
+        public function show($id){
+        $blog=DB::table('blogs')->where('id', $id)->first();
+        // dd($blog);
+        return view('posts.show', compact('blog'));
       }
 
-      public function edit($id)
-      {
+      //JSON      
+      public function showID($id){
+        $blog=DB::table('blogs')->where('id', $id)->first();
+        // dd($blog);
+        // return view('posts.show', compact('blog'));
+        return response()->json(['blogs_data' => $blog,]);
+        }
+
+      public function edit($id) {
       $blog=DB::table('blogs')->where('id', $id)->first();
       return view('posts.edit', compact('blog'));
       }
+      
       public function update(Request $request)
       {
-
-          // Validate the Field
+      // Validate the Field
     	$id = $request->id;
       $title = $request->title;
       $blogpost = $request->blogpost;
-       
-            
-      DB::table('blogs')->where('id', $id )->update([
+       DB::table('blogs')->where('id', $id )->update([
              'title' => $title,
              'blogpost' => $blogpost,
          ]);
-         return redirect()->route('index-post')->with('message','Blog Updated');
+         return redirect()->route('index-posts')->with('message','Blog Updated');
+        //  return response()->json([
+        //   'blogs_data' => $blogs, 
+        //  ]);
+        
     }
 
 
@@ -99,6 +118,6 @@ class BlogController extends Controller
         //$blog->delete();
 
 
-          return redirect()->route('index-post')->with('success', 'Blog Deleted Successfully!');
+          return redirect()->route('index-posts')->with('success', 'Blog Deleted Successfully!');
     }
 }

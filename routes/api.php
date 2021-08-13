@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/posts/indexs',[App\Http\Controllers\BlogController::class, 'index']);
+
+
+//https://laravel-json-api.readthedocs.io/en/latest/basics/routing/
