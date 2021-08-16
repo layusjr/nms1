@@ -19,27 +19,26 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const UserPage = () =>{
     const [users, setUser] = useState([]);
-
-
- const fetchUser = () => fetch('http://127.0.0.1:8000/rindex').then((data) => data.json());
+    const fetchUser = () => fetch('http://127.0.0.1:8000/rindex')
+      .then((data) => data.json());
     
-const getUsers = async () =>{
+    const getUsers = async () => {
     const users = await fetchUser();
     // console.log(JSON,stringify(users.data, null,2));
     setUser(users.data)
-}
+        }
 
-useEffect(() =>{
+    useEffect(() =>{    
     getUsers();
-}, [])
+          }, [])
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  buttonAction:{
-    padding: 2,
-  }
+    const useStyles = makeStyles({
+    table: {
+      minWidth: 650,
+    },
+    buttonAction:{
+      padding: 2,
+    }
 });
 
 
@@ -53,7 +52,8 @@ const useStyles = makeStyles({
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="center">Users List</TableCell>
+            <Button align="center">Users List</Button>
+            {/* <Link align="center">Users List</Link> */}
             
           </TableRow>
         </TableHead>
@@ -72,11 +72,12 @@ const useStyles = makeStyles({
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.created_at}</TableCell>
                 <TableCell className="classes.buttonAction">
-                <Button variant="contained" color="green" href="#" startIcon={<VisibilityIcon/>}>Show</Button>
+                <Button variant="contained"  href="{{ route('show-user', $user->id) }}" startIcon={<VisibilityIcon/>}>Show</Button>
                 <Button variant="contained" color="primary" href="#" startIcon={<EditIcon/>}>EDit</Button>
                 <Button variant="contained" color="secondary" href="#" startIcon={<DeleteIcon/>} >Delete</Button>
                 </TableCell>
              </TableRow>
+           
         ) )
             }
          

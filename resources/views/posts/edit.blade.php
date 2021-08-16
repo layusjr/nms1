@@ -9,7 +9,7 @@
                 <h2>Edit Blog</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('index-post') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
+                <a class="btn btn-primary" href="{{ route('index-posts') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
             </div>
         </div>
     </div>

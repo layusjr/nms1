@@ -12,5 +12,6 @@
 <body>
     <div id="indexblog">
     </div>
+    aweqwe
 </body>
 </html>

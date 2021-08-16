@@ -12,7 +12,7 @@ const MyFirstReactPage = () => {
     // const fetchPerson = () => fetch('http://127.0.0.1:8000/rindex').then((data) => data.json());
     //fetch data from api/url
     const fetchUser = () => fetch('http://127.0.0.1:8000/rindex').then((data) => data.json());
-    const fetchBlog = () => fetch('http://127.0.0.1:8000/posts/index').then((data) => data.json());
+    // const fetchBlog = () => fetch('http://127.0.0.1:8000/posts/index').then((data) => data.json());
 
     
     useEffect(() => {

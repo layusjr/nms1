@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/posts/indexs',[App\Http\Controllers\BlogController::class, 'index']);
-
+Route::get('/posts/indexs',[App\Http\Controllers\BlogController::class, 'indexs']);
+Route::get('/posts/showID',[App\Http\Controllers\BlogController::class, 'showID']);
 
 //https://laravel-json-api.readthedocs.io/en/latest/basics/routing/

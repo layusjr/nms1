@@ -11,16 +11,16 @@ use DB;
 class BlogController extends Controller
 {
     //fetch json file/data
-    //  public function index(){
-    //      $id = auth()->id();
-    //      $name = auth()->user()->name;
-    //      dd($name);
-    //      $blogs = Blog::latest()->paginate(3);
-    //      $blogs = Blog::get();
-    //      return response()->json([
-    //       'blogs_data' => $blogs, 
-    //     ]);  
-    // }
+     public function indexs(){
+         $id = auth()->id();
+         $name = auth()->user()->name;
+         dd($name);
+         $blogs = Blog::latest()->paginate(5);
+         $blogs = Blog::get();
+         return response()->json([
+          'blogs_data' => $blogs, 
+        ]);  
+    }
 
     //View Blog Index
     public function index()
@@ -102,7 +102,9 @@ class BlogController extends Controller
              'title' => $title,
              'blogpost' => $blogpost,
          ]);
-         return redirect()->route('index-posts')->with('message','Blog Updated');
+        //  return redirect()->route('index-posts')->with('message','Blog Updated');
+        // return view('react/indexblog');
+        return redirect('react/indexblog');
         //  return response()->json([
         //   'blogs_data' => $blogs, 
         //  ]);

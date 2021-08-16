@@ -4,6 +4,7 @@ import { data, type } from 'jquery';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import EditBlogPage from './EditBlogPage';
 
 const useStyles = makeStyles({
     table: {
@@ -37,7 +38,7 @@ const ShowBlogPage = () => {
     )
 
     const fetchData = async () => {
-        fetch(`/posts/showID/${id}`)
+        fetch(`/admin/show/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('data.blogs_data', data)
@@ -47,26 +48,31 @@ const ShowBlogPage = () => {
             });
     };
 
-    const getUser = async () => {
-        const user = await fetchUser();
-        console.log(user);
-        // console.log(JSON.stringify(user.data,null, 5));
-        // console.log(user.link)
-        // setviewUser(user.data)
-        // fetch('/posts/show{$id}')
-        //     .then(response => response.json())
-        //     .then((data) => {
-        //     setviewUser(user.data)
-        //     console.log('1231232')
-        // });
-        // const users = await fetchUser();
-    }
+    const edit = ($iid) => {
+        <EditBlogPage $id/>
+    };
+
+    // const getUser = async () => {
+    //     const user = await fetchUser();
+    //     console.log(user);
+    //     console.log(JSON.stringify(user.data,null, 5));
+    //     console.log(user.link)
+    //     setviewUser(user.data)
+    //     fetch('/posts/show{$id}')
+    //         .then(response => response.json())
+    //         .then((data) => {
+    //         setviewUser(user.data)
+    //         console.log('1231232')
+    //     });
+    //     const users = await fetchUser();
+    // }
 
     const bull = <span className={classes.bullet}>•</span>;
      
     useEffect(() => {
         fetchData();
         getUser();
+       
     }, [])
 
     
