@@ -39,7 +39,9 @@ class BlogController extends Controller
 
      public function create()
     {
-        return view('posts.create');
+      return response()->json([
+        'status' => 'inserted', 
+       ]);
     }
  /**
      * Store a newly created resource in storage.
@@ -48,29 +50,30 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    
-    {
-          // $user= new User;
-            $id = auth()->id();
-            $name = auth()->user()->name;
-            // Validate the Field
-            //dd($idi);
-            $this->validate($request,[
-          
-            'title'=>'required',
-            'blogpost'=>'required',
-            
-            
+    { 
+        return $request;
+        // $user= new User;
+        $id = auth()->id();
+        // $name = auth()->user()->name;
+        // Validate the Field
+        dd($id);
+        $this->validate($request,[
+          'title'=>'required',
+          'blogpost'=>'required',
         ]);
-       // Blog::create($request->all());
-          $blog = new Blog();
-          $blog->title=$request->title;
-          $blog->blogpost=$request->blogpost;
-          $blog->user_name=$name;
-          $blog->save();
-          return redirect()->route('index-posts')->with('message','New Blog Created Successfull !');
-
-        }
+        // Blog::create($request->all());
+        $blog = new Blog();
+        $blog->title=$request->title;
+        $blog->blogpost=$request->blogpost;
+        $blog->user_name=$name;
+        $blog->save();
+        // return response()->json([
+        //   'status' => 'inserted', 
+        //  ]);
+        return redirect()
+          ->route('index-posts')
+          ->with('message','New Blog Created Successfull !');
+    }
       
         //View one Blog
         public function show($id){
@@ -98,28 +101,38 @@ class BlogController extends Controller
     	$id = $request->id;
       $title = $request->title;
       $blogpost = $request->blogpost;
-       DB::table('blogs')->where('id', $id )->update([
-             'title' => $title,
-             'blogpost' => $blogpost,
-         ]);
+
+      $blog = Blog::find($request->id);
+      $blog->title = $title;
+      $blog->blogpost = $blogpost;
+
+      $blog->save();
+      //  DB::table('blogs')->where('id', $request )->update([
+      //        'title' => $title,
+      //        'blogpost' => $blogpost,
+      //    ]);
         //  return redirect()->route('index-posts')->with('message','Blog Updated');
         // return view('react/indexblog');
-        return redirect('react/indexblog');
-        //  return response()->json([
-        //   'blogs_data' => $blogs, 
-        //  ]);
+        // return redirect('react/indexblog');
+         return response()->json([
+          'status' => 'updated', 
+         ]);
         
     }
 
 
-  public function destroy($id)
-    {
-
-      $blog=DB::table('blogs')->where('id', $id)->delete();
-      
-        //$blog->delete();
-
-
-          return redirect()->route('index-posts')->with('success', 'Blog Deleted Successfully!');
+  public function destroy(Request $request)
+  {
+    $blog = Blog::find($request);
+    foreach($blog as $index) {
+      $index->delete();
     }
+    // $blog=DB::table('blogs')->where('id', $request)->delete();
+    // $blog->delete();
+
+    return response()->json([
+      'status' => 'success', 
+    ]);  
+    //  return redirect()->route('index-posts')->with('success', 'Blog Deleted Successfully!');
+  }
 }

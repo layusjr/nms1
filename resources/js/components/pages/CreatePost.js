@@ -1,6 +1,6 @@
 
   
-import React from 'react';
+import React,{ useEffect, useState, handleSubmit} from 'react';
 import  ReactDOM  from 'react-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { TextareaAutosize } from '@material-ui/core';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,9 +38,45 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-export default function CreatePost() {
+ 
+const CreatePost = (props) =>{
   const classes = useStyles();
+
+  const [ title, setTitle] = useState("");
+  const [blogpost, setBlogpost] = useState("");
+
+
+  const onTitleChange = e => setTitle(e.target.value);
+  const onBlogpostChange = e => setBlogpost(e.target.value);
+
+  const handleSubmit = e =>{
+    e.preventDefault();
+      
+    const data = {title, blogpost};
+
+    const token = document.head.querySelector('meta[name="csrf-token"]');
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": 'XMLHttpRequest',
+      },
+      body:JSON.stringify({
+        name:props.name,
+        id:props.id,
+        title:setTitle,
+        blogpost:setBlogpost,
+      })
+    };
+
+    fetch("http://127.0.0.1:8000/api/posts/store", requestOptions)
+        .then(response => response.json())
+        .then(res => console.log(res))
+        .catch((err) => console.error());
+  };
+
+  
 
   return (
     <Container component="main" maxWidth="xs">
@@ -52,7 +89,12 @@ export default function CreatePost() {
            Create Blog Post
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField
+         
+          
+          <TextField 
+          
+          value={title}
+          onChange={onTitleChange}
             variant="outlined"
             margin="normal"
             required
@@ -65,7 +107,9 @@ export default function CreatePost() {
             autoFocus
           />
           <TextareaAutosize
-             variant="outlined"
+          value={blogpost}
+            onChange={onBlogpostChange}
+            variant="outlined"
              margin="normal"
              required
             
@@ -78,6 +122,7 @@ export default function CreatePost() {
          
           <Button
             type="submit"
+            onClick={handleSubmit}
             fullWidth
             variant="contained"
             color="primary"
@@ -95,6 +140,9 @@ export default function CreatePost() {
   );
 }
 
+export default CreatePost;
 if(document.getElementById('createpost')){
-    ReactDOM.render(<CreatePost/>, document.getElementById('createpost'));
+  ReactDOM.render(<CreatePost
+    {...Object.assign({}, document.getElementById('createpost').dataset)}
+  />, document.getElementById('createpost'));
 }

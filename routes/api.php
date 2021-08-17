@@ -20,5 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/posts/indexs',[App\Http\Controllers\BlogController::class, 'indexs']);
 Route::get('/posts/showID',[App\Http\Controllers\BlogController::class, 'showID']);
+Route::post('/posts/delete',[App\Http\Controllers\BlogController::class, 'destroy']);
+Route::post('/posts/update',[App\Http\Controllers\BlogController::class, 'update']);
+Route::post('/posts/store',[App\Http\Controllers\BlogController::class, 'store']);
+Route::get('/posts/create',[App\Http\Controllers\BlogController::class, 'create']);
 
 //https://laravel-json-api.readthedocs.io/en/latest/basics/routing/

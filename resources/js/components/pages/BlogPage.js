@@ -18,30 +18,43 @@ import { data } from 'jquery';
 import EditBlogPage from './EditBlogPage';
 import { Dialog } from '@material-ui/core';
 import { DialogTitle } from '@material-ui/core';
-import { response } from 'express';
-import { thisExpression } from '@babel/types';
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
 
 const BlogPage = () =>{
-    const [ blogs, setBlogs ] = useState([]);
-    const [ editDialog, setEditDialog ] = useState(false);
-    const [ showDialog, setShowDialog ] = useState(false);
-    
-    const [ editTitle, setEditTitle ] = useState('');
-    const [ editPost, setEditPost ] = useState('');
-    const [ editId , setEditId ] = useState('');
+  const classes = useStyles();
 
-    const [ showTitle, setShowTitle ] = useState('');
-    const [ showPost, setShowPost ] = useState('');
-    const [ showId , setShowId ] = useState('');
+  const [ blogs, setBlogs ] = useState([]);
+  const [ editDialog, setEditDialog ] = useState(false);
+  const [ showDialog, setShowDialog ] = useState(false);
+  const [ deleteDialog, setDeleteDialog ] = useState(false);
+  
+  const [ editTitle, setEditTitle ] = useState('');
+  const [ editPost, setEditPost ] = useState('');
+  const [ editId , setEditId ] = useState('');
 
-    const fetchBlog = () => fetch('http://127.0.0.1:8000/indexs') 
-    .then((data) => data.json());
+  const [ showTitle, setShowTitle ] = useState('');
+  const [ showPost, setShowPost ] = useState('');
+  const [ showId , setShowId ] = useState('');
+
+  const [ deleteTitle, setDeleteTitle ] = useState('');
+  const [ deletePost, setDeletePost ] = useState('');
+  const [ deleteId , setDeleteId ] = useState('');
+
+  const fetchBlog = () => (
+    fetch('http://127.0.0.1:8000/indexs') 
+      .then((data) => data.json())
+  );
   
   const getBlogs = async () => {
-  const blogs = await fetchBlog();
-  //  console.log(JSON,stringify(blogs.data, null,2));
-  setBlogs(blogs.data)
-      }
+    const blogs = await fetchBlog();
+    setBlogs(blogs.data)
+  }
+
   const edit = (data, editState) => {
     setEditId(data.id);
     setEditTitle(data.title);
@@ -56,49 +69,75 @@ const BlogPage = () =>{
     setShowDialog(showState);
   };
 
+  const destroy = (data, deleteState) => {
+    setDeleteId(data.id);
+    setDeleteTitle(data.title);
+    setDeletePost(data.blogpost);
+    setDeleteDialog(deleteState);
+  };
+
+  const refresh = () => {
+    window.location.reload();
+
+  };
+
   const deleteBlog = (id) => {
-    // debugger;
-    const { blogs } = this.useState;
-    const apiUrl = BaseapiUrl +"" + id;
+    fetch('http://127.0.0.1:8000/api/posts/delete', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: id,
+          
+    }).then((data) => data.json()).then((data) => {
+      console.log('deleted', data);
+    }).catch((err) => {
+      console.error(err);
+    });
+  };
 
-    fetch(apiUrl,{ method: 'DELETE'}.then(async response => {
-      const data = await response.json();
+  const save = (id) => {
+    fetch('http://127.0.0.1:8000/api/posts/update', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        id:id,
+        title:editTitle,
+        blogpost:editPost
+      }),
+    }).then((data) => data.json()).then((data) => {
+      console.log('updated', data);
+    }).catch((err) => {
+      console.error(err);
+    });
+  };
 
-      if(!response.ok){
-        const errpr = (data && data.message) || response.status;
-        return Promise.reject(error);
-      }
-      this.SettingsBackupRestoreSharp({
-        blog: blogs.filter(blog => blog.id !== id)
-      });
-      alert('Delete Successfull');
-    })
-    .catch(error =>{
-      alert(' There was an error!');
-      console.error('There was an error!', error);
-    }));
-  
-  }
+  const store = (id) => {
+    fetch('http://127.0.0.1:8000/api/posts/update', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        id:id,
+        title:editTitle,
+        blogpost:editPost
+      }),
+    }).then((data) => data.json()).then((data) => {
+      console.log('updated', data);
+    }).catch((err) => {
+      console.error(err);
+    });
+  };
 
   useEffect(() => {
     getBlogs();
-  }, [])
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
-  const save = () => {
-
-  } 
-  const deleteHandler = (i, e) =>{
-    e.preventDefault();
-    this.props.onDelete(this.props.blogsp[i].id);
-  };
-
-  const classes = useStyles();
+  }, []);
 
   return (
     <TableContainer component={Paper}>
@@ -127,10 +166,15 @@ const useStyles = makeStyles({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={save}>Save</Button>
+        <Button onClick={()=>{
+          save(editId),
+          setEditDialog(false),
+          refresh();
+          }}>Save</Button>
           <Button onClick={()=>setEditDialog(false)}>Close</Button>
         </DialogActions>
       </Dialog>
+
 {/* show Dialog box */}
       <Dialog
         open={showDialog}
@@ -164,10 +208,49 @@ const useStyles = makeStyles({
         </DialogActions>
       </Dialog>
 
+      {/* delete Dialog box */}
+      <Dialog
+        open={deleteDialog}
+        onClose={()=>setDeleteDialog(false)}
+        fullWidth
+      >
+        <DialogTitle id="max-width-dialog-title">Blog Delete</DialogTitle>
+        <DialogContent>
+          <TextField
+          id="filled"
+          label = "Title"
+           fullWidth
+           value={deleteTitle}
+           InputProps={{
+            readOnly: true,
+          }}
+          />
+          <TextField 
+            id="filled"
+            label=" Content"
+            multiline
+            fullWidth
+            value={deletePost}
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={()=>{
+            deleteBlog(deleteId),
+            setDeleteDialog(false),
+            refresh();
+          }}>Delete</Button>
+          <Button onClick={()=>setDeleteDialog(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
+
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
         </TableHead>
         <TableRow>
+        <TableCell>Blog No.</TableCell>
         <TableCell>Title</TableCell>
             <TableCell>Author</TableCell>
             <TableCell>Date Created</TableCell>
@@ -177,7 +260,7 @@ const useStyles = makeStyles({
         <TableBody>{ 
            blogs.map((blog) => (
              <TableRow component="th" key ={blog.id}>
-                 
+                 <TableCell>{blog.id}</TableCell>
                 <TableCell>{blog.title}</TableCell>
                 <TableCell>{blog.user_name}</TableCell>
                 <TableCell>{blog.created_at}</TableCell>
@@ -185,7 +268,7 @@ const useStyles = makeStyles({
                 <Button variant="contained"  onClick={() => show(blog,true)} startIcon={<VisibilityIcon/>}>Show</Button>
                 <Button variant="contained" color="primary" onClick={() => edit(blog,true)} startIcon={<EditIcon/>}>EDit</Button>
                 {/* <Button variant="contained" color="primary" href={`/posts/edit/${blog.id}`} startIcon={<EditIcon/>}>EDit</Button> */}
-                <Button variant="contained" color="secondary" onCLick={() => this.deleteBlog(id)}   startIcon={<DeleteIcon/>} >Delete</Button>
+                <Button variant="contained" color="secondary" onClick={() => destroy(blog,true)}   startIcon={<DeleteIcon/>} >Delete</Button>
                 </TableCell>
              </TableRow>
             

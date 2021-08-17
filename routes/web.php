@@ -27,7 +27,7 @@ Route::get('/rindex', function (Request $request){
     return $users;  
 });
 Route::get('/indexs', function (Request $request) {
-   $blogs = Blog::Paginate(2);
+   $blogs = Blog::Paginate(sizeof(Blog::all()));
    return $blogs;
 });
 
@@ -53,9 +53,13 @@ Route::get('react/indexblog', function () {
 }); 
 
 Route::get('react/createpost', function () {
-    return view('/react/createpost');
-}); 
+    return view('/react/createpost')->with(['id'=>Auth::user()->id, 'name'=> Auth::user()->name]);
+})->middleware(['admin']);
 
+
+Route::get('react/createpost', function () {
+    return view('/react/createpost')->with(['id'=>Auth::user()->id, 'name'=> Auth::user()->name]);
+})->middleware(['posts']);
 
 
 
@@ -120,7 +124,7 @@ Route::middleware(['admin'])->group(function (){
     Route::post('/posts/update/{id}',[App\Http\Controllers\BlogController::class, 'update'])->name('update-post');
     Route::delete('/posts/destroy/{id}',[App\Http\Controllers\BlogController::class, 'destroy'])->name('destroy-post');
     Route::get('/posts/show/{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
-    Route::get('/posts/create',[App\Http\Controllers\BlogController::class, 'create'])->name('create-post');
+    Route::POST('/posts/create',[App\Http\Controllers\BlogController::class, 'create'])->name('create-post');
     Route::post('/posts/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');
 });
 
@@ -132,7 +136,7 @@ Route::prefix('author')->group(function (){
     Route::get('/posts/index',[App\Http\Controllers\BlogController::class, 'index'])->name('index-posts');
      Route::delete('/posts/destroy/{id}',[App\Http\Controllers\BlogController::class, 'destroy'])->name('destroy-post');
      Route::get('/posts/show/{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
-     Route::get('/posts/create',[App\Http\Controllers\BlogController::class, 'create'])->name('create-post');
+     Route::POST('/posts/create',[App\Http\Controllers\BlogController::class, 'create'])->name('create-post');
     //  Route::post('/posts/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');
      Route::post('/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');
 });
