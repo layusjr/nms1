@@ -16,6 +16,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { TextareaAutosize } from '@material-ui/core';
+import { LaptopWindows } from '@material-ui/icons';
+import HeaderNav from './HeaderNav';
 
 
 
@@ -42,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 const CreatePost = (props) =>{
   const classes = useStyles();
 
-  const [ title, setTitle] = useState("");
+  const [title, setTitle] = useState("");
   const [blogpost, setBlogpost] = useState("");
 
 
@@ -65,21 +67,26 @@ const CreatePost = (props) =>{
       body:JSON.stringify({
         name:props.name,
         id:props.id,
-        title:setTitle,
-        blogpost:setBlogpost,
+        title:title,
+        blogpost:blogpost,
       })
     };
-
+// console.log('123213', requestOptions)
     fetch("http://127.0.0.1:8000/api/posts/store", requestOptions)
         .then(response => response.json())
-        .then(res => console.log(res))
+        // .then(res => console.log(res))
+        .then(res => window.location.replace('indexblog'))
         .catch((err) => console.error());
   };
 
   
 
   return (
+    <div>
+      
+    <HeaderNav/>
     <Container component="main" maxWidth="xs">
+     
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -95,30 +102,30 @@ const CreatePost = (props) =>{
           
           value={title}
           onChange={onTitleChange}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="title"
-            label="Blog Title"
-            name="title"
-            autoComplete="title"
-            
-            autoFocus
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="title"
+          label="Blog Title"
+          name="title"
+          autoComplete="title"
+          
+          autoFocus
           />
           <TextareaAutosize
           value={blogpost}
-            onChange={onBlogpostChange}
-            variant="outlined"
-             margin="normal"
-             required
-            
-             minRows='15'
-             id="blogpost"
-             placeholder="Blog Content"
-             name="blogpost"
-             minRows='10'
-             style={{ width: "100%" }}/>
+          onChange={onBlogpostChange}
+          variant="outlined"
+          margin="normal"
+          required
+          
+          minRows='15'
+          id="blogpost"
+          placeholder="Blog Content"
+          name="blogpost"
+          minRows='10'
+          style={{ width: "100%" }}/>
          
           <Button
             type="submit"
@@ -127,7 +134,7 @@ const CreatePost = (props) =>{
             variant="contained"
             color="primary"
             className={classes.submit}
-          >
+            >
             Post
           </Button>
 
@@ -137,6 +144,7 @@ const CreatePost = (props) =>{
       </div>
     
     </Container>
+</div>
   );
 }
 
@@ -144,5 +152,5 @@ export default CreatePost;
 if(document.getElementById('createpost')){
   ReactDOM.render(<CreatePost
     {...Object.assign({}, document.getElementById('createpost').dataset)}
-  />, document.getElementById('createpost'));
+    />, document.getElementById('createpost'));
 }

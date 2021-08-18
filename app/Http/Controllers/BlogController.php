@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Auth;
+// use App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 // use App\Http\Requests;
 use App\Models\Blog;
 use App\Models\User;
 use DB;
+use Auth;
 
 class BlogController extends Controller
 {
@@ -49,14 +50,15 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     
     public function store(Request $request)
     { 
-        return $request;
+        
         // $user= new User;
-        $id = auth()->id();
-        // $name = auth()->user()->name;
+        $id = $request->id;
+        $name =  $request->name;
         // Validate the Field
-        dd($id);
         $this->validate($request,[
           'title'=>'required',
           'blogpost'=>'required',
@@ -65,14 +67,16 @@ class BlogController extends Controller
         $blog = new Blog();
         $blog->title=$request->title;
         $blog->blogpost=$request->blogpost;
+        $blog->user_id=$id;
         $blog->user_name=$name;
+        
         $blog->save();
-        // return response()->json([
-        //   'status' => 'inserted', 
-        //  ]);
-        return redirect()
-          ->route('index-posts')
-          ->with('message','New Blog Created Successfull !');
+        return response()->json([
+            'status' => 'inserted', 
+           ]);
+        // return redirect()
+        //   ->route('index-posts')
+        //   ->with('message','New Blog Created Successfull !');
     }
       
         //View one Blog

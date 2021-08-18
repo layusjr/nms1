@@ -59,7 +59,7 @@ Route::get('react/createpost', function () {
 
 Route::get('react/createpost', function () {
     return view('/react/createpost')->with(['id'=>Auth::user()->id, 'name'=> Auth::user()->name]);
-})->middleware(['posts']);
+})->middleware(['admin']);
 
 
 

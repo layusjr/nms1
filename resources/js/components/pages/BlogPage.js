@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {Container,Button, DialogContent, TextField, DialogActions, Typography, InputBase} from '@material-ui/core';
+import {Container,Button, DialogContent, TextField, DialogActions, Typography, InputBase, Grid, ThemeProvider} from '@material-ui/core';
 import { Label, SettingsBackupRestoreSharp, TextFieldsOutlined } from '@material-ui/icons';
 import { stringify } from 'postcss';
 import EditIcon from '@material-ui/icons/Edit';
@@ -18,11 +18,14 @@ import { data } from 'jquery';
 import EditBlogPage from './EditBlogPage';
 import { Dialog } from '@material-ui/core';
 import { DialogTitle } from '@material-ui/core';
+import HeaderNav from './HeaderNav';
+
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+ 
 });
 
 const BlogPage = () =>{
@@ -140,12 +143,28 @@ const BlogPage = () =>{
   }, []);
 
   return (
+    <div>
+    <HeaderNav/>   
     <TableContainer component={Paper}>
+   <Grid >
+      <Button className={classes.add}
+      color='primary'
+      size='large'
+      variant="outlined"
+      fullWidth
+      href="http://127.0.0.1:8000/react/createpost"
+  
+
+          >Add Blog Post</Button>
+
+   </Grid>
+   <Grid>
+
       <Dialog
         open={editDialog}
         onClose={()=>setEditDialog(false)}
         fullWidth
-      >
+        >
         <DialogTitle id="max-width-dialog-title">Edit Posts</DialogTitle>
         <DialogContent>
           
@@ -155,7 +174,7 @@ const BlogPage = () =>{
             value={editTitle}
             onChange={(event) => setEditTitle(event.target.value)}
             fullWidth
-          />
+            />
           <TextField
             id="outlined"
             label="Content"
@@ -163,14 +182,14 @@ const BlogPage = () =>{
             onChange={(event) => setEditPost(event.target.value)}
             multiline
             fullWidth
-          />
+            />
         </DialogContent>
         <DialogActions>
         <Button onClick={()=>{
           save(editId),
           setEditDialog(false),
           refresh();
-          }}>Save</Button>
+        }}>Save</Button>
           <Button onClick={()=>setEditDialog(false)}>Close</Button>
         </DialogActions>
       </Dialog>
@@ -180,15 +199,15 @@ const BlogPage = () =>{
         open={showDialog}
         onClose={()=>setShowDialog(false)}
         fullWidth
-      >
+        >
         <DialogTitle id="max-width-dialog-title">Blog Posts</DialogTitle>
         <DialogContent>
           <TextField
           id="filled"
           label = "Title"
-           fullWidth
-           value={showTitle}
-           InputProps={{
+          fullWidth
+          value={showTitle}
+          InputProps={{
             readOnly: true,
           }}
           />
@@ -201,7 +220,7 @@ const BlogPage = () =>{
             InputProps={{
               readOnly: true,
             }}
-          />
+            />
         </DialogContent>
         <DialogActions>
           <Button onClick={()=>setShowDialog(false)}>Close</Button>
@@ -213,15 +232,15 @@ const BlogPage = () =>{
         open={deleteDialog}
         onClose={()=>setDeleteDialog(false)}
         fullWidth
-      >
+        >
         <DialogTitle id="max-width-dialog-title">Blog Delete</DialogTitle>
         <DialogContent>
           <TextField
           id="filled"
           label = "Title"
-           fullWidth
-           value={deleteTitle}
-           InputProps={{
+          fullWidth
+          value={deleteTitle}
+          InputProps={{
             readOnly: true,
           }}
           />
@@ -234,7 +253,7 @@ const BlogPage = () =>{
             InputProps={{
               readOnly: true,
             }}
-          />
+            />
         </DialogContent>
         <DialogActions>
           <Button onClick={()=>{
@@ -272,15 +291,16 @@ const BlogPage = () =>{
                 </TableCell>
              </TableRow>
             
-        ) )
-            }
+            ) )
+          }
         </TableBody>
       </Table>
+          </Grid>
     </TableContainer>
+</div>
   );
-
-          }
+ }
 export default BlogPage;
 if(document.getElementById('indexblog')){
-    ReactDOM.render(<BlogPage/>, document.getElementById('indexblog'));
+  ReactDOM.render(<BlogPage/>, document.getElementById('indexblog'));
 }
