@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    variant: 'text' | 'contained' | 'fab',
     
   },
 }));
@@ -29,16 +30,21 @@ const HeaderNav = () =>{
       <AppBar position="sticky">
         <Toolbar>
           
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-          <Typography variant="h6" className={classes.title}>
+          <Button className={classes.title}
+          href="/home">
+            Home
+          </Button>
+          <Button className={classes.title}
+          href="/react/userpage">
             User List
-          </Typography>
-          <Typography variant="h6" className={classes.title}>
+          </Button>
+          <Button  className={classes.title}
+          color="inherit">
             Blog List
-          </Typography>
-          <Button color="inherit">Login</Button>
+          </Button>
+          <Button
+           color="inherit"
+          >Login</Button>
         </Toolbar>
       </AppBar>
     </div>
