@@ -74,9 +74,6 @@ class BlogController extends Controller
         return response()->json([
             'status' => 'inserted', 
            ]);
-        // return redirect()
-        //   ->route('index-posts')
-        //   ->with('message','New Blog Created Successfull !');
     }
       
         //View one Blog
@@ -111,14 +108,7 @@ class BlogController extends Controller
       $blog->blogpost = $blogpost;
 
       $blog->save();
-      //  DB::table('blogs')->where('id', $request )->update([
-      //        'title' => $title,
-      //        'blogpost' => $blogpost,
-      //    ]);
-        //  return redirect()->route('index-posts')->with('message','Blog Updated');
-        // return view('react/indexblog');
-        // return redirect('react/indexblog');
-         return response()->json([
+      return response()->json([
           'status' => 'updated', 
          ]);
         
@@ -127,16 +117,13 @@ class BlogController extends Controller
 
   public function destroy(Request $request)
   {
-    $blog = Blog::find($request);
+   $blog = Blog::find($request);
     foreach($blog as $index) {
       $index->delete();
     }
-    // $blog=DB::table('blogs')->where('id', $request)->delete();
-    // $blog->delete();
-
     return response()->json([
       'status' => 'success', 
     ]);  
-    //  return redirect()->route('index-posts')->with('success', 'Blog Deleted Successfully!');
-  }
+    
+}
 }

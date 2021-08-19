@@ -26,3 +26,12 @@ Route::post('/posts/store',[App\Http\Controllers\BlogController::class, 'store']
 Route::get('/posts/create',[App\Http\Controllers\BlogController::class, 'create']);
 
 //https://laravel-json-api.readthedocs.io/en/latest/basics/routing/
+Route::get('/admin/showID',[App\Http\Controllers\BlogController::class, 'showID']);
+
+Route::get('/admin/dashboard',[App\Http\Controllers\UserController::class, 'index']);
+Route::get('/admin/usercreate',[App\Http\Controllers\UserController::class, 'create']);
+Route::post('admin/store',[App\Http\Controllers\UserController::class, 'store']);
+Route::get('/admin/show/{id}',[App\Http\Controllers\UserController::class, 'show']);
+Route::get('/admin/edit/{id}',[App\Http\Controllers\UserController::class, 'edit']);
+Route::post('/admin/update',[App\Http\Controllers\UserController::class, 'update']);
+Route::post('/admin/delete',[App\Http\Controllers\UserController::class, 'destroy']);

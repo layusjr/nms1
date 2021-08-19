@@ -49,17 +49,15 @@ class UserController extends Controller
         ]);
        // Blog::create($request->all());
          $user = new User();
-        
-        
         $user->name=$request->name;
        $user->email=$request->email;
        $user->password=$request->password;
        $user->roles=$request->roles;
-        
-        
+    
         $user->save();
-        return redirect()->route('index-posts')->with('message','New Blog Created Successfull !');
-
+        return response()->json([
+            'status' => 'created',
+        ]);
     }
 
     /**
@@ -77,6 +75,13 @@ class UserController extends Controller
         }
         return view('admin.show', compact('user'));
     }
+
+    public function showID($id){
+        $user=DB::table('users')->where('id', $id)->first();
+        // dd($blog);
+        // return view('posts.show', compact('blog'));
+        return response()->json(['users_data' => $user,]);
+        }
 
     /**
      * Show the form for editing the specified resource.
@@ -96,23 +101,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $id = $request->id;
+       
+         // Validate the Field
+    	$id = $request->id;
         $name = $request->name;
+        $email = $request->email;
         $roles = $request->roles;
 
-       DB::table('users')->where('id', $id )->update([
-             'name' => $name,
-             'roles' => $roles,
-         ]);
-       $user= new User;
-        $users = User::get();
-        foreach($users as $user){
-            $user=DB::table('users')->where('id', $id)->first();
-        }
-        return redirect('/admin/dashboard')->withSuccess('User Updated!');
-
+        $user = User::find($request->id);
+        $user->name = $name;
+        $user->email = $email;
+        $user->roles = $roles;
+        $user->save();
+        return response()->json([
+        'status' => 'updated', 
+        ]);
+          
     }
 
     /**
@@ -121,24 +127,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-    $user=DB::table('users')->where('id', $id)->delete();
-    echo("sample");
-   // return redirect()->route('index-admin')->with('message', 'User Deleted Successfully!');
-  //  return redirect('admin.dashboard', compact('users'));
-    return redirect('/admin/dashboard')->with('message','User Deleted Succesfully');
-
-    }
-
-    public function view()
-    {
-        $users = User::latest()->paginate(3);
-        $users = User::get();
+     $user = User::find($request);
+      foreach($user as $index) {
+        $index->delete();
+      }
+      return response()->json([
+        'status' => 'success', 
+      ]);  
       
-        
-        return view('layouts.app', compact('users'))->with('i',(request()->input('page',1)-1)*5)->withSuccess('Success message');
-    }
+  }
 }
 
 

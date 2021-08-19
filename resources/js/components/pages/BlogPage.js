@@ -119,24 +119,6 @@ const BlogPage = () =>{
     });
   };
 
-  const store = (id) => {
-    fetch('http://127.0.0.1:8000/api/posts/update', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        id:id,
-        title:editTitle,
-        blogpost:editPost
-      }),
-    }).then((data) => data.json()).then((data) => {
-      console.log('updated', data);
-    }).catch((err) => {
-      console.error(err);
-    });
-  };
 
   useEffect(() => {
     getBlogs();
@@ -146,21 +128,15 @@ const BlogPage = () =>{
     <div>
     <HeaderNav/>   
     <TableContainer component={Paper}>
-   <Grid >
       <Button className={classes.add}
       color='primary'
       size='large'
       variant="outlined"
       fullWidth
       href="http://127.0.0.1:8000/react/createpost"
-  
+    >Add Blog Post</Button>
 
-          >Add Blog Post</Button>
-
-   </Grid>
-   <Grid>
-
-      <Dialog
+    <Dialog
         open={editDialog}
         onClose={()=>setEditDialog(false)}
         fullWidth
@@ -295,7 +271,6 @@ const BlogPage = () =>{
           }
         </TableBody>
       </Table>
-          </Grid>
     </TableContainer>
 </div>
   );

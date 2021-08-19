@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    variant: 'text' | 'contained' | 'fab',
+    color: "inherit",
+    // variant: 'text' | 'contained' | 'fab',
     
   },
 }));
@@ -39,7 +40,8 @@ const HeaderNav = () =>{
             User List
           </Button>
           <Button  className={classes.title}
-          color="inherit">
+          href="/react/indexblog"
+         >
             Blog List
           </Button>
           <Button

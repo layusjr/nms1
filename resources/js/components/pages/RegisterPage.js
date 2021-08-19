@@ -20,13 +20,6 @@ import Radio from '@material-ui/core/Radio';
 import { SettingsOverscanOutlined } from '@material-ui/icons';
 import { set } from 'lodash';
 
-
-function Copyright() {
-  return ( 
-      <Typography hidden>Copy Right</Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -45,18 +38,55 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
- 
+  
 }));
 
-export default function RegisterPage() {
-  const [value, setValue] = useState([]);
+const RegisterPage = (props) => {
   const classes = useStyles();
-  const handleChange = (event) =>{
-    setValue(event.target.value);
-  }
 
-  return (
-    <Container component="main" maxWidth="xs" >
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [roles, setRoles] = useState("");
+
+  const onNameChange = e => setName(e.target.value);
+  const onEmailChange = e => setEmail(e.target.value);
+  const onPasswordChange = e =>setPassword(e.target.value);
+  const onRolesChange = e => setRoles(e.target.value);
+
+  const handleSubmit = e =>{
+    e.preventDefault();
+  
+    const data = {name, email, password, roles,};
+
+    // const token = document.head.querySelector('meta{name="csrf-token"]');
+
+    const requestOptions = {
+      method: "POST",
+      headers:   {
+         "Content-Type": "application/json",
+      "X-Requested-With": 'XMLHttpRequest',
+    },
+    body:JSON.stringify({
+      // name:props.name,
+      // id:props.id,
+      // title:title,
+      // blogpost:blogpost,
+      name:name,
+      email:email,
+      password:password,
+      roles:roles,
+    })
+  };
+
+    fetch("http://127.0.0.1:8000/api/admin/store", requestOptions)
+      .then(response => response.json())
+      .then(res => console.log(res))
+      // .then(res => window.location.replace('userpage'))
+      .catch((err) => console.error());
+};
+return (
+  <Container component="main" maxWidth="xs" >
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -68,6 +98,8 @@ export default function RegisterPage() {
         <form className={classes.form} noValidate>
      
           <TextField
+          value={name}
+          onChange={onNameChange}
             variant="outlined"
             margin="normal"
             required
@@ -75,10 +107,11 @@ export default function RegisterPage() {
             id="name"
             label="Full Name"
             name="name"
-            autoComplete="name"
             autoFocus
-          />
+            />
              <TextField
+              value={email}
+              onChange={onEmailChange}
             variant="outlined"
             margin="normal"
             required
@@ -87,8 +120,10 @@ export default function RegisterPage() {
             label="Email Address"
             name="email"
             autoComplete="email"
-                      />
+            />
           <TextField
+           value={password}
+           onChange={onPasswordChange}
             variant="outlined"
             margin="normal"
             required
@@ -98,10 +133,13 @@ export default function RegisterPage() {
             type="password"
             id="password"
             autoComplete="current-password"
-          />
+            />
           <div>
-          <FormLabel component="legend">Roles</FormLabel>
-        <RadioGroup aria-label="gender" name="role" value={value} onChange={handleChange}>
+          <FormLabel component="legend"
+           value={roles}
+           onChange={onRolesChange}
+          >Roles</FormLabel>
+        <RadioGroup aria-label="gender" name="role"  onChange={handleSubmit}>
         <FormControlLabel value="author" control={<Radio />} label="Author" />
         <FormControlLabel value="reader" control={<Radio />} label="Reader" />
       </RadioGroup>
@@ -112,7 +150,7 @@ export default function RegisterPage() {
             variant="contained"
             color="primary"
             className={classes.submit}
-          >
+            >
             Register
           </Button>
           <Grid container>
@@ -129,12 +167,13 @@ export default function RegisterPage() {
         </form>
       </div>
       <Box mt={8}>
-        <Copyright />
+       
       </Box>
     </Container>
   );
 }
-
-if (document.getElementById('signup')) {
-  ReactDOM.render(<RegisterPage />, document.getElementById('signup'));
-}
+  
+  export default RegisterPage;
+  if (document.getElementById('signup')) {
+    ReactDOM.render(<RegisterPage />, document.getElementById('signup'));
+  }

@@ -23,7 +23,7 @@ use App\Models\Blog;
 
 // json
 Route::get('/rindex', function (Request $request){
-    $users= User::Paginate(2);
+    $users= User::Paginate(sizeof(User::all()));
     return $users;  
 });
 Route::get('/indexs', function (Request $request) {
@@ -128,7 +128,7 @@ Route::middleware(['admin'])->group(function (){
     Route::post('/posts/store',[App\Http\Controllers\BlogController::class, 'store'])->name('store-post');
 });
 
-Route::get('/posts/showss/{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
+// Route::get('/posts/showss/{id}',[App\Http\Controllers\BlogController::class, 'show'])->name('show-post');
 
 Route::prefix('author')->group(function (){
     Route::get('/posts/edit/{id}',[App\Http\Controllers\BlogController::class, 'edit'])->name('edit-post');
