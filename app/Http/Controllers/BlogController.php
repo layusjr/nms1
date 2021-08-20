@@ -117,6 +117,7 @@ class BlogController extends Controller
 
   public function destroy(Request $request)
   {
+    
    $blog = Blog::find($request);
     foreach($blog as $index) {
       $index->delete();

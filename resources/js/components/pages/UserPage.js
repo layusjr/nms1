@@ -65,8 +65,10 @@ const UserPage = () =>{
           'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: id,
-            
+        body: JSON.stringify({
+          id:id,
+         
+        }),
       }).then((data) => data.json()).then((data) => {
         console.log('deleted', data);
       }).catch((err) => {
@@ -267,8 +269,8 @@ const UserPage = () =>{
         <DialogActions>
           <Button onClick={()=>{
             deleteUser(deleteId),
-            setDeleteDialog(false),
-            refresh();
+            setDeleteDialog(false);
+            // refresh();
           }}>Delete</Button>
           <Button onClick={()=>setDeleteDialog(false)}>Close</Button>
         </DialogActions>

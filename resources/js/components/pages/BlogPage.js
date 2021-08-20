@@ -96,8 +96,11 @@ const BlogPage = () =>{
         'Content-Type': 'application/json'
       },
       method: 'POST',
-      body: id,
-          
+      body: JSON.stringify({
+        id:id,
+        title:editTitle,
+        blogpost:editPost
+      }),
     }).then((data) => data.json()).then((data) => {
       console.log('deleted', data);
     }).catch((err) => {

@@ -129,13 +129,11 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-     $user = User::find($request);
-      foreach($user as $index) {
-        $index->delete();
-      }
-      return response()->json([
+        $user = User::find($request->id);
+        $user->delete();
+        return response()->json([
         'status' => 'success', 
-      ]);  
+        ]);  
       
   }
 }
