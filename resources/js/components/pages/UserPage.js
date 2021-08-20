@@ -240,7 +240,7 @@ const UserPage = () =>{
         <Button onClick={()=>{
           save(editId);
           setEditDialog(false);
-          // refresh();
+          refresh();
         }}>Save</Button>
           <Button onClick={()=>setEditDialog(false)}>Close</Button>
         </DialogActions>

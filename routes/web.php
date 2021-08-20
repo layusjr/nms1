@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Models\Blog;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,9 @@ Route::get('/showID/${id}', function (Request $request) {
 
 
 // view
+Route::get('home', function () {
+    return view('/home');
+});
 Route::get('react/userpage', function () {
     return view('react/userpage');
 }); 
@@ -107,7 +111,7 @@ Auth::routes();
 // // Route::get('/reader', 'ReaderController@index')->name('reader')->middleware('reader');
 
 
-
+Route::get('logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
 
 Route::middleware(['admin'])->group(function (){
     // Route::get('admin/dashboard', 'UserController@index')->name('admin-dashboard');
@@ -146,6 +150,3 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
-// https://hackernoon.com/how-to-fetch-data-from-an-api-in-reactjs-j11q34k0
-// https://www.appsloveworld.com/react-js-insert-update-display-delete-crud-operations/

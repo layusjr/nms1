@@ -24,3 +24,4 @@ require('./components/HeaderNavBar');
 require('./components/pages/CreatePost');
 require('./components/pages/ShowBlogPage');
 require('./components/pages/EditBlogPage');
+require('./components/pages/HomePage');

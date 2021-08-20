@@ -54,6 +54,10 @@ const RegisterPage = (props) => {
   const onPasswordChange = e =>setPassword(e.target.value);
   const onRolesChange = e => setRoles(e.target.value);
 
+  const rolesChange = (event) => {
+    setRoles(event.target.value)
+  }
+
   const handleSubmit = e =>{
     e.preventDefault();
   
@@ -139,7 +143,8 @@ return (
            value={roles}
            onChange={onRolesChange}
           >Roles</FormLabel>
-        <RadioGroup aria-label="gender" name="role"  onChange={handleSubmit}>
+          <RadioGroup>
+        {/* <RadioGroup aria-label="gender" className="roles" value={roles} onChange = {(event => rolesChange(event))}> */}
         <FormControlLabel value="author" control={<Radio />} label="Author" />
         <FormControlLabel value="reader" control={<Radio />} label="Reader" />
       </RadioGroup>
@@ -177,3 +182,5 @@ return (
   if (document.getElementById('signup')) {
     ReactDOM.render(<RegisterPage />, document.getElementById('signup'));
   }
+
+  // https://stackoverflow.com/questions/44577673/react-js-how-do-i-set-a-checked-selected-radio-button-and-track-the-onchange

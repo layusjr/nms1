@@ -34,4 +34,6 @@ Route::post('admin/store',[App\Http\Controllers\UserController::class, 'store'])
 Route::get('/admin/show/{id}',[App\Http\Controllers\UserController::class, 'show']);
 Route::get('/admin/edit/{id}',[App\Http\Controllers\UserController::class, 'edit']);
 Route::post('/admin/update',[App\Http\Controllers\UserController::class, 'update']);
-Route::post('/admin/delete',[App\Http\Controllers\UserController::class, 'destroy']);
+
+
+Route::get('logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');

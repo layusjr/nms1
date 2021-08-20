@@ -23,7 +23,12 @@ import HeaderNav from './HeaderNav';
 
 const useStyles = makeStyles({
   table: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     minWidth: 650,
+  },
+  show:{
+    
+    maxWidth: 'lg',
   },
  
 });
@@ -130,18 +135,18 @@ const BlogPage = () =>{
     <TableContainer component={Paper}>
       <Button className={classes.add}
       color='primary'
-      size='large'
+      size='small'
       variant="outlined"
       fullWidth
       href="http://127.0.0.1:8000/react/createpost"
     >Add Blog Post</Button>
-
+{/* EDIT BLOG */}
     <Dialog
         open={editDialog}
         onClose={()=>setEditDialog(false)}
-        fullWidth
+        fullWidth={true}
         >
-        <DialogTitle id="max-width-dialog-title">Edit Posts</DialogTitle>
+        <DialogTitle id="max-width-dialog-title" backgroundColor="primary">Edit Posts</DialogTitle>
         <DialogContent>
           
           <TextField
@@ -149,6 +154,7 @@ const BlogPage = () =>{
             label="Title"
             value={editTitle}
             onChange={(event) => setEditTitle(event.target.value)}
+            multiline
             fullWidth
             />
           <TextField
@@ -171,13 +177,12 @@ const BlogPage = () =>{
       </Dialog>
 
 {/* show Dialog box */}
-      <Dialog
+      <Dialog 
         open={showDialog}
         onClose={()=>setShowDialog(false)}
-        fullWidth
         >
         <DialogTitle id="max-width-dialog-title">Blog Posts</DialogTitle>
-        <DialogContent>
+        <DialogContent >
           <TextField
           id="filled"
           label = "Title"
@@ -256,7 +261,7 @@ const BlogPage = () =>{
            blogs.map((blog) => (
              <TableRow component="th" key ={blog.id}>
                  <TableCell>{blog.id}</TableCell>
-                <TableCell>{blog.title}</TableCell>
+                <TableCell style={{width: '30%'}}>{blog.title}</TableCell>
                 <TableCell>{blog.user_name}</TableCell>
                 <TableCell>{blog.created_at}</TableCell>
                 <TableCell className="classes.buttonAction">
