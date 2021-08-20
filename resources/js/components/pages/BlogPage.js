@@ -24,13 +24,8 @@ import HeaderNav from './HeaderNav';
 const useStyles = makeStyles({
   table: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    minWidth: 650,
-  },
-  show:{
-    
-    maxWidth: 'lg',
-  },
- 
+    minWidth: 550,
+  }, 
 });
 
 const BlogPage = () =>{
@@ -143,11 +138,12 @@ const BlogPage = () =>{
       fullWidth
       href="http://127.0.0.1:8000/react/createpost"
     >Add Blog Post</Button>
+
 {/* EDIT BLOG */}
     <Dialog
         open={editDialog}
         onClose={()=>setEditDialog(false)}
-        fullWidth={true}
+        maxWidth="650"
         >
         <DialogTitle id="max-width-dialog-title" backgroundColor="primary">Edit Posts</DialogTitle>
         <DialogContent>
@@ -183,6 +179,7 @@ const BlogPage = () =>{
       <Dialog 
         open={showDialog}
         onClose={()=>setShowDialog(false)}
+        maxWidth="700"
         >
         <DialogTitle id="max-width-dialog-title">Blog Posts</DialogTitle>
         <DialogContent >
@@ -263,7 +260,7 @@ const BlogPage = () =>{
         <TableBody>{ 
            blogs.map((blog) => (
              <TableRow component="th" key ={blog.id}>
-                 <TableCell>{blog.id}</TableCell>
+                 <TableCell >{blog.id}</TableCell>
                 <TableCell style={{width: '30%'}}>{blog.title}</TableCell>
                 <TableCell>{blog.user_name}</TableCell>
                 <TableCell>{blog.created_at}</TableCell>
